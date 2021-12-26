@@ -18,3 +18,34 @@ public:
        return count;
     }
 };
+/*
+OPTIMISATION OF TIME
+TIME:O(N)
+SPACE:O(N)
+VIDEO EXPLANATION:https://youtu.be/5L9Jrehvoew(BEST)
+*/
+
+/* PESUDO CODE
+STEP1:  FIRST WE DECLARE AN UNORDERED MAP SO THAT WE CAN ACCESS IN O(1) TIME,THEN DECLARE AN ANS VARIABLE
+STEP 2:TRAVERSE THE ARRAY ,WHATEVER IS PRESENT AT THE ith INDEX FIND ITS COUNTERPART ..I MEAN ,K-ARR[I] WILL BE COUNTER OF ARR[I]..
+STEP 3:IF COUNTERPART IS PRESENT IN MAP THEN INCREASE ANS BY THE FREQUENCY OF COUNTERPART IN THE MAP
+STEP 4:INSERT ELEMENT AT THE ith INDEX IN THE MAP
+STEP 5:RETURN ANS
+*/
+
+class Solution{   
+public:
+    int getPairsCount(int arr[], int n, int k) {
+        // code here
+     unordered_map<int,int>m;
+     int ans=0;
+     for(int i=0;i<n;i++){
+         int val=k-arr[i];
+         if(m[val]){
+             ans+=m[val];
+         }
+         m[arr[i]]++;
+     }
+     return ans;
+    }
+};
