@@ -49,3 +49,58 @@ public:
      return ans;
     }
 };
+/*
+IF WE WANNA SAVE SPACE THEN OPTIMIZATION COULD BE DONE(two pointer approach used)
+TIME:O(nlog(n))+O(n)=O(nlogn)
+space:O(1)
+video explaination:(not exact but quite similar):  https://youtu.be/4t9jv9AkVdE
+editorial:  https://www.geeksforgeeks.org/count-pairs-with-given-sum-set-2/
+*/
+
+class Solution{   
+public:
+// Function to return the count of pairs
+// from arr[] with the given sum
+    int getPairsCount(int arr[], int n, int k) {
+        // code here
+         // To store the count of pairs
+        int ans = 0;
+        // Sort the given array
+        sort(arr,arr+n);
+         // Take two pointers
+        int l=0;
+        int r=n-1;
+        while(l<r){
+            // If sum is lesser
+            if(arr[l]+arr[r]<k){
+                l++;
+            }
+            // If sum is greater
+            else if(arr[l]+arr[r]>k){
+                r--;
+            }
+            // If sum is equal
+            else{
+                // Find the frequency of arr[l]
+                int x=arr[l],xx=l;
+                
+                while (l< r and arr[l] == x)
+                l++;
+                // Find the frequency of arr[r]
+            int y = arr[r], yy = r;
+             while (r >= l and arr[r] == y)
+                r--;
+        // If arr[l] and arr[r] are same
+            // then remove the extra number counted
+        if(x==y){
+            ans+=l-xx;
+        }
+        else
+                ans += (l - xx) * (yy - r);
+            }
+        }
+// Return the required answer
+    return ans;
+    }
+};
+
