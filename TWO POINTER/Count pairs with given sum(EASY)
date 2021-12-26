@@ -93,7 +93,8 @@ public:
         // If arr[l] and arr[r] are same
             // then remove the extra number counted
         if(x==y){
-            ans+=l-xx;
+            int temp = l - xx + yy - r - 1;
+                ans += (temp * (temp + 1)) / 2;
         }
         else
                 ans += (l - xx) * (yy - r);
