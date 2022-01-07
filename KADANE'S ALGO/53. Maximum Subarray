@@ -1,0 +1,27 @@
+problem:https://leetcode.com/problems/maximum-subarray/
+video:
+/*
+use two for loops ...find all possible subarrays ..return the maximum sum among them
+time:O(n*2)
+space:O(1)
+*/
+
+/*
+optimised code: using kadane's algo 
+time:O(n)
+space:O(1)
+1->  local_maximum at index i is the maximum of A[i] and the sum of A[i] and local_maximum at index i-1.
+
+2-   >This way, at every index i, the problem boils down to finding the maximum of just two numbers,
+     A[i] and (A[i] + local_maximum[i-1]). Thus the maximum subarray problem can be solved by solving these sub-problems of finding local_maximums recursively.
+     
+3->  Also, note that local_maximum[0] would be A[0] itself.
+
+4->  Using the above method, we need to iterate through the array just once, which is a lot better than our previous brute force approach.
+     Or to be more precise, the time complexity of Kadane’s Algorithm is O(n).
+5->  Note that instead of using an array to store local_maximums, we are simply storing the latest local_maximum in an int type variable 
+     ‘local_max’ because that’s what we need to calculate next local_maximum. 
+     Also, as we are using a variable ‘global_max’ to keep track of the maximum value of
+     local_maximum, which in the end comes out to be the required output.
+     
+     */
