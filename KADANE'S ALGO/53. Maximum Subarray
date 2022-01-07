@@ -42,3 +42,6 @@ public:
         return global_max;
     }
 };
+/*
+another approach can be using divide and conquer....solve when you learn this technique
+*/
