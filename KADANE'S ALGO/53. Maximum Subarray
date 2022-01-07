@@ -28,7 +28,7 @@ space:O(1)
      local_maximum, which in the end comes out to be the required output.
      
      */
-     
+ //METHOD 1    
 class Solution {
 public:
     int maxSubArray(vector<int>& nums) {
@@ -42,6 +42,27 @@ public:
         return global_max;
     }
 };
+//METHOD 2
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        /*USING STRIVER'S APPROACH
+        KADANE'S ALGO INTUTION:WE CARRY A SUBARRAY SUM UNTILL AND UNLESS IT CARRIES A POSITIVE SUM
+        */
+       int sum=0;
+        int maxi=INT_MIN;
+        for(auto it:nums){
+           sum+=it;
+            maxi=max(maxi,sum);
+            if(sum<0)
+                sum=0;
+        }
+        return maxi;
+    }
+    
+};
+
+
 /*
 another approach can be using divide and conquer....solve when you learn this technique
 */
