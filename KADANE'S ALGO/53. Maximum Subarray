@@ -43,6 +43,9 @@ public:
     }
 };
 //METHOD 2
+VIDEO:https://youtu.be/w_KEocd__20
+//TIME:O(N)
+SPACE:O(1)
 class Solution {
 public:
     int maxSubArray(vector<int>& nums) {
