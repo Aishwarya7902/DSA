@@ -28,3 +28,36 @@ public:
         return ans;
     }
 };
+/*
+optimised solution:
+time :O(N)
+space:O(1)
+*/
+
+
+class Solution {
+public:
+    //for explanation visit: https://youtu.be/vtJvbRlHqTA
+    /*
+    what we are doing here is that each time we are moving forward we are carrying with us the prev max as well as the prev min ...
+   then at every moment we calculate current max as well as current min ...it may be possible that our past value has reduced to zero so at the current index we will start from that 
+  
+  index...then after calculating curr max and curr min we are updating prev max and prev min
+  */
+    int maxProduct(vector<int>& nums) {
+        int n=nums.size();
+        int curr_max_prod=nums[0];
+        int curr_min_prod=nums[0];
+        int ans=nums[0];
+        int prev_max_prod=nums[0];
+        int prev_min_prod=nums[0];
+        for(int i=1;i<n;i++){
+           curr_max_prod=max( prev_max_prod*nums[i],max(prev_min_prod*nums[i],nums[i]));
+             curr_min_prod=min( prev_max_prod*nums[i],min(prev_min_prod*nums[i],nums[i]));
+            ans=max(ans,curr_max_prod);
+            prev_max_prod=curr_max_prod;
+            prev_min_prod=curr_min_prod;
+        }
+        return ans;
+    }
+};
