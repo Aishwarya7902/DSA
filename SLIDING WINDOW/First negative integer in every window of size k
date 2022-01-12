@@ -33,7 +33,8 @@ vector<long long> printFirstNegativeInteger(long long int arr[],long long int N,
                                                  
      queue<long long>q;
      vector<long long>v;
-     int i=0,j=0;
+     int i=0;
+     int j=0;
      while(j<n){
          if(arr[j]<0){
              q.push(arr[j]);
