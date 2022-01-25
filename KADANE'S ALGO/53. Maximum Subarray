@@ -5,6 +5,20 @@ use three for loops ...find all possible subarrays ..1 loop for start of subarra
 return the maximum sum among them
 time:O(n*3)
 space:O(1)
+int maxSubArray(vector<int>& nums) {
+      int mx=INT_MIN;
+        int n=nums.size();
+        for(int i=0;i<n;i++){
+            for(int j=i;j<n;j++){
+                int sum=0;
+                for(int k=i;k<=j;k++){
+                    sum+=nums[k];
+                }
+                mx=max(mx,sum);
+            }
+        }
+        return mx;
+    }
 
 
 */
