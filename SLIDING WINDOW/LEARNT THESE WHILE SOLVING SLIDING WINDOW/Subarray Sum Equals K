@@ -27,11 +27,11 @@ public:
 };
 
 /* further optimisation
-
 LEARNT A NEW CONCEPT OF PREFIX SUM HERE...HERE PREFIX SUM NAME IS LS
 SUM[i,j]=LS[j]-LS[i-1]
 if(i==0)
 SUM[i,j]=LS[j];
+
 
 tc:O(n*2)
 sc:O(n)
