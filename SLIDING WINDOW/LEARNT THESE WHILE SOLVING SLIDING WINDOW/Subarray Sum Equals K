@@ -25,3 +25,40 @@ public:
         return count;
     }
 };
+
+/* further optimisation
+tc:O(n*2)
+sc:O(n)
+*/
+#include<bits/stdc++.h>
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
+        
+        int count=0;
+        int n=nums.size();
+        vector<int>v;
+        int sum=nums[0];
+        v.push_back(sum);
+        for(int i=1;i<nums.size();i++){
+            sum+=nums[i];
+            v.push_back(sum);
+            
+        }
+        for(int i=0;i<n;i++){
+            for(int j=i;j<n;j++){
+                
+               if(i==0){
+                    if(v[j]==k)count++;
+                }
+                else
+                {
+                    if((v[j]-v[i-1])==k){
+                        count++;
+                    }
+                }
+            }
+        }
+        return count;
+    }
+};
