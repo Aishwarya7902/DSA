@@ -29,6 +29,7 @@ public:
 /* further optimisation
 LEARNT A NEW CONCEPT OF PREFIX SUM HERE...HERE PREFIX SUM NAME IS LS
 SUM[i,j]=LS[j]-LS[i-1]
+//here SUM[i,j] means sum of the subarray starting form pointer i and ending at j
 if(i==0)
 SUM[i,j]=LS[j];
 
