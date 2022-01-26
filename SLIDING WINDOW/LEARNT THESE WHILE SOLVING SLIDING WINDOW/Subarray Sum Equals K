@@ -81,4 +81,4 @@ from index i=0 and its size is 1 ...so if this sum==k which is our target then o
 now we will increment j and add nums[j] to sum variable ,now this means that now in our sum variable we have a sum of a subarray which start from i=0 and whose size is 2
 similary increment j  (till j<nums.size() )and find sums of all possible subarrays which start at i =0 and end at j
 
-proceed further by incrementing i
+proceed further by incrementing i that means now our starting point of subarray is new i ...similarly move j and calculate sum and update count when possible.
