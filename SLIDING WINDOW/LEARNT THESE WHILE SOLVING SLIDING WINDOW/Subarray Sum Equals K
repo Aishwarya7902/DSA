@@ -69,3 +69,16 @@ public:
         return count;
     }
 };
+/* FURTHER OPTIMIZATION
+FOR BETTER UNDERSTANDING GO TO TIMESTAMP 3:35 TO 4:57 OF ABOVE GIVEN VIDEO
+tc:O(n*2)
+sc:O(1)
+PSEUDO CODE: what we are doing here ...since we were already traversing through all possible subarrays
+like for eg for subarray starting at i=0 we were traversing through subarrays of size 1 ,2,3,4...and so on and so forth
+so when you are already visiting at each subarry then calculate its sum ...for every i initialise sum =0
+now we start j=i ,it means now our subarray size is 1 ...so lets add nums[j] to our sum...this means that now sum variable contains sum of a subarray which is starting 
+from index i=0 and its size is 1 ...so if this sum==k which is our target then only we will increment our count.
+now we will increment j and add nums[j] to sum variable ,now this means that now in our sum variable we have a sum of a subarray which start from i=0 and whose size is 2
+similary increment j  (till j<nums.size() )and find sums of all possible subarrays which start at i =0 and end at j
+
+proceed further by incrementing i
