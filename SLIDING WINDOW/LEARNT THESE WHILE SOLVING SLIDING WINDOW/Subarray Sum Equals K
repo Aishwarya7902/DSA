@@ -34,8 +34,8 @@ if(i==0)
 SUM[i,j]=LS[j];
 
 
-tc:O(n*2)
-sc:O(n)
+tc:O(n)+O(n*2)=O(n*2) here we are using two for loops
+sc:O(n) we are using extra vector of prefixSum
 */
 #include<bits/stdc++.h>
 class Solution {
@@ -44,7 +44,7 @@ public:
         
         int count=0;
         int n=nums.size();
-        vector<int>v;
+        vector<int>prefixSum;
         int sum=nums[0];
         v.push_back(sum);
         for(int i=1;i<nums.size();i++){
