@@ -82,3 +82,21 @@ now we will increment j and add nums[j] to sum variable ,now this means that now
 similary increment j  (till j<nums.size() )and find sums of all possible subarrays which start at i =0 and end at j
 
 proceed further by incrementing i that means now our starting point of subarray is new i ...similarly move j and calculate sum and update count when possible.
+*/
+int subarraySum(vector<int>& nums, int k) {
+        
+        int count=0;
+        int n=nums.size();
+       int sum;
+        for(int i=0;i<n;i++){
+            sum=0;
+            for(int j=i;j<n;j++){
+                sum+=nums[j];
+                if(sum==k)count++;
+              
+            }
+        }
+        return count;
+    }
+    
+    
