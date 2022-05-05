@@ -1,0 +1,48 @@
+/*BRUTE FORCE 
+PSEUDO CODE
+TC:O(N^2)
+SC:O(N)
+1. take 1st element of nums1 and find the index where it lies in nums2
+2. now since we got the index 
+3. now in nums2 search from (index+1 )th index which is the just greater element ..if it is greater return immediately
+4. otherwise return -1
+5. store the returned next greater element in a vector ans
+6. return ans
+7. repeat step1 for rest elements of nums1
+*/
+
+#include<bits/stdc++.h>
+class Solution {
+public:
+    int NextGreater(vector<int>& nums2,int ind,int n){
+       for(int k=ind;k<nums2.size();k++){
+           if(nums2[k]>n){
+               return nums2[k];
+           }
+       } 
+        return -1;
+    }
+    
+    
+    int Search(vector<int>& nums2,int num) {
+       for(int i=0;i<nums2.size();i++){
+           if(nums2[i]==num){
+               return i;
+           }
+       }
+   
+   return -1;
+}
+    
+    
+    vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
+        vector<int>ans;
+       
+        for(int i=0;i<nums1.size();i++){
+            int index=Search(nums2,nums1[i]);
+            int curr_next=NextGreater(nums2,index+1,nums2[index]);
+            ans.push_back(curr_next);
+        }
+        return ans;
+    }
+};
