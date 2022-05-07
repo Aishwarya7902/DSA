@@ -1,0 +1,80 @@
+problem:https://practice.geeksforgeeks.org/problems/next-larger-element-1587115620/1/#
+
+/*BRUTE FORCE
+PSEUDO CODE:
+1.go to every index i,to search next greater element search from i+1 index
+2.if next greater element is found ,store in a vector
+3.similary find the next greter element for every index of the vector
+4.return ans vector
+TC:O(N^2)
+SC:O(N)
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+
+ // } Driver Code Ends
+class Solution
+{
+    public:
+    //Function to find the next greater element for each element of the array.
+    int NextGreater(vector<long long>& arr,int ind,int n){
+       for(int k=ind;k<arr.size();k++){
+           if(arr[k]>n){
+               return arr[k];
+           }
+       } 
+        return -1;
+    }
+    vector<long long> nextLargerElement(vector<long long> arr, int n){
+        // Your code here
+        vector<long long>ans;
+        for(int i=0;i<arr.size();i++){
+            int curr=NextGreater(arr,i+1,arr[i]);
+            ans.push_back(curr);
+        }
+        return ans;
+    }
+};
+
+/*
+OPTIMISATION
+TC:O(N)
+SC:O(N)
+pseudo code
+1.start from last index of given vector
+2.take an extra stack and a vector
+3.if stack is empty ,stor -1 in vector
+4.if top of stack is greater than current index ,i.e nums[i]<s.top() ......then store top of stack in vector
+5.if top of stack is less ,pop it
+
+for better understanding see aditya verma's video:https://youtu.be/NXOOYYwpbg4
+*/
+
+vector<long long> nextLargerElement(vector<long long> arr, int n){
+        // Your code here
+        vector<long long>v;
+        stack<long long>s;
+        for(int i=n-1;i>=0;i--){
+            if(s.size()==0){
+                v.push_back(-1);
+            }
+            
+            
+            else {
+                while(s.size()>0 && s.top()<=arr[i]){
+                    s.pop();
+                }
+                if(s.size()==0){
+                    v.push_back(-1);
+                }
+                else{
+                    v.push_back(s.top());
+                }
+            }
+            s.push(arr[i]);
+        }
+       reverse(v.begin(),v.end());
+       return v; 
+    }
