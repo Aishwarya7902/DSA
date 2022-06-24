@@ -1,0 +1,68 @@
+PROBLEM:https://leetcode.com/problems/n-queens/
+
+/*
+TC:
+SC:
+steps in bactracking
+
+1.place yourself at start point
+2.explore all the possibe paths
+       |
+			 |
+	**steps to explore**
+	A.insert your element at only correct position and once inserted 
+     move onto smaller prolems.
+	B.now backtrack and explore new possibilities.
+	C. once you reach base case print yourself.
+	*/
+  
+  
+  #include<vector>
+class Solution {
+public: 
+    bool isSafe(vector<string> &board,int row,int col){
+        //checking same column
+        for(int i=row-1;i>=0;i--){
+            if(board[i][col]=='Q'){
+                return false;
+            }
+        }
+        //upper left diagonl 
+        for(int i=row-1,j=col-1;i>=0 && j>=0;i--,j--){
+            if(board[i][j]=='Q'){
+                return false;
+            }
+        }
+        //upper right diagonl 
+        for(int i=row-1,j=col+1;i>=0 && j<board.size();i--,j++){
+            if(board[i][j]=='Q'){
+                return false;
+            }
+        }
+        return true;
+    }
+    void nQueenHelper(vector<vector<string>> &ans, vector<string> &board,int target,int row){
+        if(row==board.size()){
+            if(target==0){
+            ans.push_back(board);
+            
+            
+            }
+            return;
+        }
+        for(int j=0;j<board.size();j++){
+            if(isSafe(board,row,j)){
+                board[row][j]='Q';
+                nQueenHelper(ans,board,target-1,row+1);
+                board[row][j]='.';
+            }
+        }
+        return;    
+    }
+    vector<vector<string>> solveNQueens(int n) {
+        vector<vector<string>>ans;
+        vector<string>board(n,string(n,'.'));
+        nQueenHelper(ans,board,n,0);
+        return ans;
+    }
+};
