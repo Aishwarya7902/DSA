@@ -1,3 +1,6 @@
+PROBLEM:https://practice.geeksforgeeks.org/problems/m-coloring-problem-1587115620/1#
+video:https://youtu.be/wuVwUK25Rfc
+
 // TC: O(m^n)*n(issafe)
 /*Here's how i devised the TC for this: 
 At each node, there will be at max there will be m opions  available for colouring
