@@ -1,0 +1,110 @@
+// TC: O(m^n)*n(issafe)
+/*Here's how i devised the TC for this: 
+At each node, there will be at max there will be m opions  available for colouring
+and for each operation on a node, their childs will have their own respective m options.
+
+i.e if a graph was:
+                              1
+                            /    \
+                          2      3  
+
+then at node 1 there will be m opions but for each operation on node 1, there will be m options 
+on its successive nodes(here on the node 2 and then on node 3). i.e m*m*m = m^3 == m^n
+
+thus on graphs having n nodes, starting from source node, there will be: m*m*m*...........*m(n terms) == m^n.
+Thus, TC will be O(m^n)*n(issafe).
+*/
+
+//SC:O(N) for colour vector
+// explanation of every line
+
+bool isSafe(bool graph[101][101], int col, int n,int node,vector<int>&color){
+    /*explanation for isSafe function:
+    1.for the given node we will look for all its connected edges and if the connected edge 
+    has same colour as that of node we will return false 
+    2.in case we checked all the connected edges have different colour as that of node 
+    that means it is possible to colour the node with col ...hence we retun true
+    
+    */
+    
+    for(int i=0;i<n;i++){
+        if( i!=node && graph[node][i] && color[i]==col){
+            return false;
+        }
+    }
+    return true;
+}
+bool solve(bool graph[101][101], int m, int n,int node,vector<int>&color){
+    //base case
+    if(node==n)return true;/*at this moment we can conclude that no.of nodes given to us were 4
+    and we reached
+    the serial no 4 ...now whenever we reach serial no 4 ...why did we reach here...
+    coz we were able to color
+    every previous node with some color that's why we reached the last serial no...
+    hence return true from here
+    */
+    
+/* EXPLANATION FOR  SOLVE FUNCTION EXCEPT BASE CASE...AS BASE CASE IS ALREADY EXPLAINED ABOVE:
+1. bactracking tagline 2 !!!!!!!!!!!
+ now explore every possible path ..now what do u mean by that.....insert yourself at only correct possible position 
+ and once inserted move onto smaller prolems.
+ 
+2.we will try every color at a node and if it is possible to place that color on 
+that particular node we will fill that col on the node and will call recursion
+for smaller problems...and if recursion returns true ..that means it is possible
+to color the graph with atmost m colors...so return true from there.
+
+3.in case recursion returns false ..we will backtrack and place color[node]=0 coz since recursion returned a false
+that means it is not pssible to color the grapgh if we start with that col ...so we will bactrack and will try the next 
+possibility.
+
+4.in case if we tried out every possible col and none of them returned true that means it isn't possible
+to colour the graph with atmost m colours...hence we return false 
+
+*/
+    for(int col=1;col<=m;col++){ 
+        if(isSafe(graph,col,n,node,color)){
+            color[node]=col;
+            if(solve(graph,m,n,node+1,color))return true;
+            color[node]=0;
+        }
+    }
+    return false;
+}
+bool graphColoring(bool graph[101][101], int m, int n) {
+    // your code here
+    vector<int>color(n,0);//this works as visited array and will keep track of nodes which we already coloured
+    return solve(graph,m,n,0,color);//bactracking tagline 1 !!!!!!!!!!!
+    //place yourself at start and explore all possible positions
+}
+
+
+
+
+/*CODE*/
+
+
+bool isSafe(bool graph[101][101], int col, int n,int node,vector<int>&color){
+for(int i=0;i<n;i++){
+        if( i!=node && graph[node][i] && color[i]==col){
+            return false;
+        }
+    }
+    return true;
+}
+bool solve(bool graph[101][101], int m, int n,int node,vector<int>&color){
+if(node==n)return true;
+for(int col=1;col<=m;col++){ 
+        if(isSafe(graph,col,n,node,color)){
+            color[node]=col;
+            if(solve(graph,m,n,node+1,color))return true;
+            color[node]=0;
+        }
+    }
+    return false;
+}
+
+bool graphColoring(bool graph[101][101], int m, int n) {
+vector<int>color(n,0);
+return solve(graph,m,n,0,color);
+}
