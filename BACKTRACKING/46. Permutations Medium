@@ -1,0 +1,62 @@
+problem: https://leetcode.com/problems/permutations/
+
+/*
+brute force (USING RECURSION)
+Solution 1: Recursive
+tc: O(N!*N) for each no we have to generate its pemutation ...hence N! and since there are N no(loop runs n times) hence tc will be O(N!*N)
+sc: O(N) //for frequency array
+
+pseudo code:
+1.we are given a nums array ...we will declare a 2d vector of int ans which will store all
+the permutations.
+
+2.declare a  vector of int (ds) to store current permutation
+
+3.declare a map or frequency array and initialize it to zero and call recursion
+
+4.base case:
+when our curr vector's size is equal to size of nums .....push it in ans and return
+
+5.we run a for loop starting from 0 to nums.size()-1 
+check the frequency of i is unmarked or not...if it is unmarked then it means it has not been picked yet....so we can pick it and make sure it is marked as picked.
+
+6.call recursion to pick other elements
+
+7.make sure to throw out the element from the ds vector  when we come back from recursion and unmark the element from the map
+
+❤feel: hum for loop chalake element ko ds me dalenge only  if it is not marked in
+frequency array  and then we will call recursion......and when we come back from recursion
+humlog aisa behave karenge ki humne to kuch kiya hi ni...i.e we will throw out the 
+eleement from the ds and unmark it from frequeny array
+
+8.at  last return ans
+*/
+
+class Solution {
+public:
+    void permuteHelp(vector<int>&nums,vector<vector<int>>&ans,vector<int>&ds,int freq[]){
+        //base case
+        if(ds.size()==nums.size()){
+            ans.push_back(ds);
+            return;
+        }
+        for(int i=0;i<nums.size();i++){
+            if(!freq[i]){
+                freq[i]=1;
+                ds.push_back(nums[i]);
+                permuteHelp(nums,ans,ds,freq);
+                freq[i]=0;
+                ds.pop_back();
+            }
+        }
+    }
+    vector<vector<int>> permute(vector<int>& nums) {
+      vector<vector<int>>ans;
+      vector<int>ds;
+      int freq[nums.size()];
+      for(int i=0;i<nums.size();i++)
+          freq[i]=0;
+      permuteHelp(nums,ans,ds,freq);
+      return ans;
+    }
+};
