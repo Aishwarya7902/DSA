@@ -60,3 +60,68 @@ public:
       return ans;
     }
 };
+
+
+
+
+/*
+BACTRACING APPROACH
+video(striver bhaiya):https://youtu.be/f2ic2Rsc9pU
+
+TC:O(N X N!) here N! coz we are generating permutation and N coz we are running a loop
+SC:O(1) we didn't use any extraa data structure except auxiliary space which is O(n) and O(n!) for storing all permutations in ans ....so we are saving a lot of space in this approach
+
+tagline/feel ❤❤: 1st position pe array ke  har ek element ko try karo..and baki kam recursion ko de do i.e 2nd position pe har possibility ko check karne ki zimmedari hamari ni recursion ki hai....
+similary for all rest position pe har ek possibility ko try karne ki zimmedri recursion ki😉
+base case:when pointer==nums.size() ...push nums in ans✌
+
+INTUTION BEHIND SWAPPING✨✨:
+we are starting pointer from i=ind to i-nums.size()-1 and swapping so that every no  should be at a particular index.
+
+PSEUDO CODE:
+1.declare a vector of vector to store all the permutations
+2.call helper function with index 0,nums and ans
+3.base case...when index reaches size of nums..push it in ans and return
+4.run a loop from 0 index to nums.size()-1 index....we are running loop so as to try out every 
+possible element at a particular position
+5.call recursion to try out every possibility at other positions starting from position+1
+6.once u coma back from recursion make sure to reswap so as to try other possibility at that particular index....(this step is nothing but backtracking😎) 
+
+*/
+
+
+
+class Solution {
+public:
+    void swap(int &i,int &j){
+        int temp=i;
+        i=j;
+        j=temp;
+    }
+    
+    
+    void helper(int ind,vector<int>& nums,vector<vector<int>>&ans){
+        //base case ...if index becomes equal to nums.size it means we have reached a possible permutation  so we insert it in our ans.
+        if(ind==nums.size()){
+            ans.push_back(nums);
+            return;
+        }
+        
+        for(int i=ind;i<nums.size();i++){
+            //try out every element at every particular position and swap that index  with that position
+            swap(nums[ind],nums[i]);
+            //call recursion to try every possibility all rest positions
+            helper(ind+1,nums,ans);
+             
+            //backtrack
+            
+            swap(nums[ind],nums[i]);
+        }
+    }
+    vector<vector<int>> permute(vector<int>& nums) {
+        vector<vector<int>>ans;
+        helper(0,nums,ans);
+        return ans;
+    }
+};
+
